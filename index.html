@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="clockContainer">
+        <div id="hour"></div>
+        <div id="minute"></div>
+        <div id="second"></div>
+    </div>
+    <div id="timings_chart">
+            <table>
+                <thead>
+                    <tr>
+                        <th>City</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>New York</td>
+                        <td id="new-york"></td>
+                    </tr>
+                    <tr>
+                        <td>London</td>
+                        <td id="london"></td>
+                    </tr>
+                    <tr>
+                        <td>Tokyo</td>
+                        <td id="tokyo"></td>
+                    </tr>
+                    <tr>
+                        <td>Sydney</td>
+                        <td id="sydney"></td>
+                    </tr>
+                    <tr>
+                        <td>Paris</td>
+                        <td id="paris"></td>
+                    </tr>
+                    <tr>
+                        <td>Mumbai</td>
+                        <td id="mumbai"></td>
+                    </tr>
+                    <tr>
+                        <td>Los Angeles</td>
+                        <td id="los-angeles"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <iframe src="https://timing.athanplus.com/masjid/widgets/embed?theme=1&masjid_id=zKzoboLO" type="text/html" width="100%" height="615" frameborder="0" allowtransparency="true"></iframe>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
