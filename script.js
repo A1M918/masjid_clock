@@ -1,3 +1,5 @@
+let namazTimings;
+
 setInterval(() => {
     d = new Date(); //object of date()
     hr = d.getHours();
@@ -11,25 +13,40 @@ setInterval(() => {
     minute.style.transform = `rotate(${min_rotation}deg)`;
     second.style.transform = `rotate(${sec_rotation}deg)`;
 
-    updateTimeZones();
+    // updateTimeZones();
     }, 1000);
 
-
-    function updateTimeZones() {
-        const timeZones = [
-            { id: 'new-york', timeZone: 'America/New_York' },
-            { id: 'london', timeZone: 'Europe/London' },
-            { id: 'tokyo', timeZone: 'Asia/Tokyo' },
-            { id: 'sydney', timeZone: 'Australia/Sydney' },
-            { id: 'paris', timeZone: 'Europe/Paris' },
-            { id: 'mumbai', timeZone: 'Asia/Kolkata' },
-            { id: 'los-angeles', timeZone: 'America/Los_Angeles' }
-        ];
-    
-        timeZones.forEach(zone => {
-            const now = new Date().toLocaleTimeString('en-US', { timeZone: zone.timeZone });
-            document.getElementById(zone.id).textContent = now;
-        });
+    function updateTimes(prayerTimings) {
+        const tbody = document.getElementById('prayer-times');
+            prayerTimings.forEach(prayer => {
+                const row = document.createElement('tr');
+                const nameCell = document.createElement('td');
+                const timeCell = document.createElement('td');
+        
+                nameCell.textContent = prayer.name.toUpperCase();
+                timeCell.textContent = prayer.time;
+        
+                row.appendChild(nameCell);
+                row.appendChild(timeCell);
+                tbody.appendChild(row);
+            });             
     }
 
-    updateTimeZones(); // Initial call to set the time zones
+    const namazNames = ['asr', 'fajr', 'isha', 'maghrib', 'zuhr'];
+
+    // updateTimeZones(); // Initial call to set the time zones
+
+    async function getNamazTimings() {
+        const {data: {data: namaTimings}} = await axios.get('https://masjidal.com/api/v1/time/range?masjid_id=zKzoboLO');
+        
+        const salah = Object.keys(namaTimings.salah[0]).map((k) => {
+            if(namazNames.indexOf(k)>=0){
+                return {name: k, time: namaTimings.salah[0][k]}
+            }
+        }).filter((x) => x)
+        console.log(salah);
+        console.log(namaTimings);
+        updateTimes(salah);
+    }
+    getNamazTimings()
+    // initTime();
