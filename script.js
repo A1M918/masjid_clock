@@ -46,6 +46,11 @@ setInterval(() => {
         }).filter((x) => x)
         console.log(salah);
         console.log(namaTimings);
+        const date_time = document.getElementById("date_time");
+        const hijri_time = document.getElementById("hijri_time");
+
+        date_time.innerText = namaTimings.salah[0].date
+        hijri_time.innerText = namaTimings.salah[0].hijri_month + namaTimings.salah[0].hijri_date 
         updateTimes(salah);
     }
     getNamazTimings()
